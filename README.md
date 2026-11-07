@@ -1,192 +1,96 @@
-# Dungeons of Infinity and Beyond
+# Dungeons of Infinity — Nintendo 3DS port
 
-**The full dungeon on your handheld, whatever its screen.**
+A from-scratch C engine (devkitARM, libctru, citro2d) that reuses the original's data and art. It is not a GameMaker runtime.
 
-Play Dungeons of Infinity fullscreen on ROCKNIX handhelds, with a classic Zelda HUD and a layout that fits 4:3, 16:9 and other screens. Health, magic, your active item and supplies stay in view. Equipment, the map and dungeon progress sit beside the playfield on wide screens and open over it on 4:3 screens.
+## Build
 
-[**Download the installer**](https://github.com/saschb2b/The-Legend-of-Zelda-Dungeons-of-Infinity-and-Beyond/releases/latest) · [Installation](#install) · [Screens](#screens) · [Controls](#controls) · [What's changed](CHANGELOG.md)
-
-![Dungeons of Infinity on a 16:9 Retroid Pocket Flip 2, with equipment, pendants and crystals left of the playfield and the minimap and floor progress to its right](docs/screenshots/widescreen.png)
-
-- The complete playfield keeps its SNES shape on every screen. The title and menus fill wide screens.
-- Status panels sit beside the playfield where they fit, as in the original 16:9 game.
-- Display options for a CRT effect, square pixels and integer scaling.
-- Selected updates from the newer game include inventory bags, sword poke and spin, Topaz, adjustable challenges, and Wallmaster mode.
-- Visit the village arcade for the claw machine, or play Mothula's Money in the pub.
-
-## Install
-
-You need a ROCKNIX handheld with at least 4 GB of RAM, PortMaster, Wi-Fi, and about 300 MiB of free space. The game is tested on the Retroid Nova (4:3) and Retroid Pocket Flip 2 (16:9); other Qualcomm-based ROCKNIX handhelds share their graphics driver.
-
-1. Download the **patch installer ZIP** from the [latest release](https://github.com/saschb2b/The-Legend-of-Zelda-Dungeons-of-Infinity-and-Beyond/releases/latest).
-2. Extract the ZIP and copy both items into `/storage/roms/ports/`:
-
-   ```text
-   ports/
-   ├── Install Zelda Dungeons of Infinity and Beyond.sh
-   └── zeldadoi-beyond-installer/
-   ```
-
-3. Refresh the game list and run **Install Zelda Dungeons of Infinity and Beyond** from Ports.
-4. Wait for installation to finish, then launch **Zelda Dungeons of Infinity and Beyond**.
-
-The installer downloads the official PortMaster package and applies the patch automatically. You do not need to download or patch game files yourself.
-
-**Updating:** close the game, replace the installer files with the newer download, and run the installer again. Your saves stay in `zeldadoi-beyond/savedata/`. The installer preserves them and keeps migration backups in `zeldadoi-beyond/save-backups/`.
-
-An installation in `zeldadoi-43`, from a release before 2.0.0, cannot update in the game. Run this installer once: it moves the game and all saves to `zeldadoi-beyond` and removes the old launcher and installer.
-
-For updates over Wi-Fi, choose **Options > About > Updates** from the adventure menu. It shows the installed and available patch versions and the changes since your version. Use L/R to page through the notes. Choose **Install update** to download the update and restart the game. Press **B** to close or cancel a download.
-
-The updater checks stable releases only when you open Updates or choose Check again. It verifies downloads before installation and preserves your saves. If installation fails, the previous version remains available. Keep the device powered on during installation.
-
-If installation fails, check `zeldadoi-beyond-installer/install.log`. For another attempt, run the installer again.
-
-## Screens
-
-The playfield always shows the full 256×224 picture in the SNES's 4:3 shape. On other screen shapes it is centered with black borders, and the HUD and button hints stay on the playfield.
-
-| Screen | Examples | Status panels |
-| --- | --- | --- |
-| 4:3 | Retroid Nova, Retroid Pocket Mini | Open over the playfield with the right stick |
-| Taller than 4:3 | AYANEO Pocket DMG, Retroid Pocket Mini V2 | Open over the playfield; borders above and below |
-| 3:2 | AYANEO Pocket ACE | Open over the playfield; narrow side borders |
-| 16:9 and 5:3 | Retroid Pocket 5, Flip 2 and 6, AYN Odin 2, RG552 | Beside the playfield, shown from the start; the right stick hides them |
-
-![Dungeons of Infinity on a 4:3 Retroid Nova, with the classic HUD and Status button hint](docs/screenshots/playfield.png)
-
-The title shows its full scene on wide screens, and the menus extend their landscape to the edges. The title and adventure menu show the installed version at the bottom left, and **Options > About** lists it with the base game version.
-
-Under **Options > Display**, **Square pixels** draws game pixels square instead of slightly wide, which narrows the playfield. **Integer scaling** gives every pixel row the same height, with wider borders. Both apply to the whole device. **CRT effect** adds scanlines, a phosphor grille and soft bloom to the playfield and is saved for each player.
-
-## Controls
-
-These are the default controller bindings. Change them under **Options > Controls**, from the adventure menu or the pause menu. Each button hint follows your current mapping, including keyboard bindings.
-
-![Gamepad remapping grouped by Combat and World, with two changed actions marked and the default shown](docs/screenshots/controls.png)
-
-| Button | During play | In the inventory |
-| --- | --- | --- |
-| D-pad / left stick | Move | Highlight an object or action |
-| A | Interact | Open Actions, open a bag, or confirm the highlighted action |
-| B | Sword | Close the current view |
-| X | Use the equipped item | Equip the highlighted object, when available |
-| Y | Open the map | |
-| Start | Open the inventory | Close the inventory |
-| Select | Pause | Close the inventory |
-| Right-stick click | Show or hide Status | |
-| L / R | | Previous / next inventory page |
-| Select + Start | Exit to Ports | Exit to Ports |
-
-![Pause menu with Resume, Options and Controls above Start over and the quit options, a run summary with floor, hearts, bonus, challenges and an active curse, and the Save Tent warning](docs/screenshots/pause.png)
-
-The pause menu (Select) shows your run: floor, time, hearts, bosses, bonus, challenges and any curse. **Resume**, **Options** and **Controls** come first; **Start over**, **Quit to title** and **Quit to desktop** sit below a divider and ask before acting. The game saves only at Save Tents, so quitting says that progress since the last tent is lost. **Controls** opens your current button mapping directly.
-
-Press **B** to close the map, menus, item information, or inventory. Closing an action list or item information returns to the inventory. Closing a pause submenu returns to the pause menu. In name entry, B closes without saving. Choose **Erase letter** to delete a character. On a keyboard, Escape closes or cancels the current view.
-
-At a shop counter, press **A** to inspect an item. In its dialog, A confirms the highlighted choice and **B** closes without buying. Closing also works while reading item information or a purchase refusal.
-
-During play, a hint beside **Status** names the interaction within reach: **Talk**, **Open**, **Lift**, or **Throw** while carrying. Signs show **Read** and shop goods show **Inspect**. The hint follows your Interact binding and disappears when you turn away, open a menu, or lose control during an animation or room transition.
-
-**Actions** opens an object's choices. **Equip** assigns it to the active item button. **Use** activates or consumes it immediately. Gear in dedicated equipment slots is already active. Its action list provides information and, where allowed, Drop.
-
-Use **L/R** to switch inventory pages, or **Page Up/Page Down** on a keyboard. The D-pad stays in the item grid. Health and counters remain visible while browsing or reading item information.
-
-Input hints sit together at the bottom right, with each action label followed by its button. The primary action (A) comes before Close (B), which stays at the far right. Equip and the current action keep fixed positions as inventory contents and labels change. L/R stays beside the page heading, with room reserved for the longest title.
-
-| Inventory below the HUD | Contextual item actions |
-| --- | --- |
-| ![Compact bag inventory below health and counters, with Switch 2 button hints below the frame](docs/screenshots/inventory.png) | ![Item action list with a confirm hint that names the highlighted Info action](docs/screenshots/inventory-actions.png) |
-
-Inventory and menu screenshots use test saves to show progress and full inventories. They come from a Retroid Nova (4:3); the wide-screen view comes from a Retroid Pocket Flip 2.
-
-| Status on a 4:3 screen | Continue your adventure |
-| --- | --- |
-| ![Equipment, map, and dungeon progress over the playfield](docs/screenshots/overlay.png) | ![Adventure menu with the saved name and floor beneath Continue and the installed version at the bottom left](docs/screenshots/profile.png) |
-
-The title screen leads into an adventure menu with your last selected player. Their name and floor sit beneath **Continue**, which resumes the saved run in one press. **New adventure** shows your character beside the bonus and challenges, with a line below explaining the highlighted choice. Press **A** on any row except Challenges to begin, and **Begin adventure** is selected by default. **Random** picks another character. Each player's last setup is remembered. A fresh player starts as Link, with no required name entry.
-
-![New adventure with a character preview, Wooden Shield bonus, the Second Quest challenge preset with its level meter and icons, and Begin adventure](docs/screenshots/adventure-setup.png)
-
-![Players as cards with character, floor, play time, challenge level, hearts, wins and deaths, and a New player card](docs/screenshots/players.png)
-
-**Change player** shows each player as a card with their character, floor, play time, hearts, wins and deaths, and it opens on the current player. The line below says when each player last played. Select a player to return to their adventure, or press **Details** for their full records, **Rename** and **Delete player**. Deleting asks first, with Cancel selected, and names the run that will be erased. When renaming, L erases a letter and R adds a space. Starting over an existing save asks for confirmation. Options, controls, updates and credits are available before entering the dungeon.
-
-![Options on the Display tab with CRT effect, Square pixels, Integer scaling and Blood and remains, and a description of the selected setting](docs/screenshots/options.png)
-
-**Options** opens the same screen from the adventure menu and the pause menu. L/R switch between Game, Display, Audio and Controls, and left/right changes the highlighted setting. **Display** holds the CRT effect, **Square pixels** and **Integer scaling**. Changes apply immediately, and a line below the list explains each setting. **Defaults** restores the current tab after confirmation. Gamepad and Keyboard list every action by group. Choose one and press its new button; a button another action already uses swaps between them. Changed actions are marked, the help line shows the default, and **Reset** restores just the highlighted action. **Restore all defaults** at the end of the list asks first. Menu Confirm (A), Back (B) and Pause (Select) stay fixed, so remapping can never lock you out of the menus. Select cancels a remap, which also stops after ten seconds. Music and sound effects have ten volume steps; zero mutes them. Controls, CRT and item messages are saved for each player. Volume, blood, title skipping, square pixels and integer scaling apply to the whole device. Updates and credits are under **About** in the adventure menu.
-
-## Playing and updating
-
-The village on floor 6 has two more minigames. The claw costs ten rupees: move left/right and grab with A. In the pub, L/R changes the slot bet and A plays. B closes either game.
-
-Hold Sword after a swing to poke while moving. With a level-three sword or higher, hold until the blade flashes, then release to spin. Level-two swords can break pots.
-
-Choose a challenge preset with left/right: **Hero's Path** is the standard game, **Second Quest** is tougher, and **Master Quest** is for veterans. The level meter adds up every challenge, and icons show which ones are active. Press **A** on Challenges to customize health, darkness, inventory space, shop prices and other restrictions; each explains itself, changed values are marked, and **Defaults** restores Hero's Path after asking. The last page includes No map, No food, and Wall Master. Existing runs keep their original challenge restrictions, and saves started with challenges show their level beside the floor.
-
-Press Start or confirm to skip the opening title animation. To require the full animation, turn off **Skip title intro** under **Options > Game**.
-
-This is an unofficial patch of the PortMaster **1.1.6 VM** build with selected 1.2.x backports. It does not include every change from 1.2.1. Read the [backport audit](docs/BACKPORTS.md) for coverage and the [changelog](CHANGELOG.md) for changes between patch releases.
-
-<details>
-<summary>Save format and backups</summary>
-
-Saves from earlier save formats convert when loaded. Items beyond the inventory's capacity remain available on overflow pages.
-
-Before converting a save format, the installer keeps a copy of the saves in `save-backups/`:
-
-- `before-inventory-v1.zip`: saves in the format before inventory bags.
-- `before-content-v3.zip`: saves in the format before Topaz and adjustable challenges.
-
-Reinstallation keeps these backups. An earlier patch release can only read the saves in its own format.
-
-</details>
-
-## Development and testing
-
-The repository distributes patch code and binary deltas. Installer downloads contain no standalone game or runtime. Checksums verify the upstream package and patched output.
-
-[TESTING.md](docs/TESTING.md) covers builds, GitHub CI, the isolated device regression suite, and the release procedure. Patch versions are independent of the original game's versions. Related fixes stay under Unreleased until the batch is ready.
-
-<details>
-<summary>Build the patch on Linux</summary>
-
-Use Linux x86-64 and Python 3.11 or newer:
+Requires devkitPro with the `3ds-dev` group (`tex3ds`, `3dsxtool`) and Python 3 with Pillow. Run from `3ds/`, after a root `python3 build.py` has produced `../.build`:
 
 ```sh
-python3 -m unittest discover -v
-python3 build.py --check-release --runtime-tests
+export DEVKITPRO=/opt/devkitpro DEVKITARM=/opt/devkitpro/devkitARM
+export PATH=$PATH:$DEVKITPRO/tools/bin:$DEVKITARM/bin
+python3 tools/export_dungeons.py ../.build/port/apk/assets/data/data_d
+python3 tools/export_roomtpl.py ../.build/port/apk/assets/data/data_r
+python3 tools/build_assets.py ../.build/export
+python3 tools/export_audio.py ../.build/port/apk/assets romfs/audio.bin
+python3 tools/export_front.py ../.build/export ../.build/port/apk/assets/data/data_r
+make
 ```
 
-The build downloads the pinned PortMaster package and UndertaleModTool CLI 0.9.2.0, checks their hashes, and compiles the patch. It verifies the checked-in delta against the clean build, then tests installation and reinstallation. Full game archives stay in the ignored `.build/` directory.
+The result is `doi3ds.3dsx`. Run the tests with `python3 -m unittest discover -s tests`.
 
-GitHub Actions runs the unit suite and build checks on pushes and pull requests. Runtime assertions run separately on a device. The installer uses Python's standard library. Release packaging uses `requirements-build.txt`.
+## Status
 
-</details>
+Compiles without warnings and runs in the Azahar emulator; it has never run on hardware. Debug builds (`EXTRA_CFLAGS=-DDOI_AUTOPLAY ...`) must not be shipped.
 
-<details>
-<summary>Rendering and device support</summary>
+What was checked, and how:
 
-Device tests run on the Retroid Nova (1280×960) and Retroid Pocket Flip 2 (1920×1080). Layout tests also cover the other screens of ROCKNIX devices that meet the port's 4 GB requirement: 1240×1080, 1620×1080, 1920×1152 and 2560×1440. On Qualcomm Adreno GPUs the launcher selects Freedreno; other GPUs keep Mesa's default. It also selects SDL's evdev controller backend.
+- Link's sprite sheets (stand, walk, run, sword, push, carry, lift, throw, hurt) were rendered in Azahar and compared with the originals. That check exposed a citro2d pivot bug in the sprite and rotation helpers, which is fixed.
+- Collisions use the original GameMaker masks: Link's wall box and enemy hit box, the sword blades (four frames per sword, pixel-exact), the previously ported enemy types and the five newly added enemy types where checked, the pots, Armos, Aghanim, Lanmola and Moldorm. `tests/game_test.c` covers them.
+- Combat follows the decompiled scripts: health in eighths of a heart, 80 invincibility ticks, per-source knockback, damage scaled by DEFENSE, the LinkSwordDamage table, graded bomb damage, the charged spin, the original drop pools and pickup amounts, and the four bosses (`boss_*.c`) with their own scripts. Dungeon template order is shuffled per player in the save, Save Tents follow dungeons 4, 6, 8, 10 and 12, and rooms scroll as Link crosses a door. `tests/game_test.c` covers each of these through the game step.
+- The claw machine plays its original music and motor loop (`Music_ClawMachine`, `Sound_ClawMachine_Motor`). A full round ran in Azahar; the audio itself was not listened to.
+- The start-up flow follows the original's. The title (sky, castle, logo, triforce, sword, sparkles and the fading text), Select User with five players, the name entry on the 13 by 6 letter grid and the Start Game page with its bonus item were rebuilt from the decompiled `oTitle`, `oMenu` and `LetterGrid_*` code and their sprites. In Azahar the title with its fade, Select User (the inactive window uses the original's grey-outlined font), name entry (typing a name) and the start outside were seen on screen.
+- A new adventure starts outside, in the South room of the original's two-room level 0 at (128, 468): the night, the rain with its splashes, the leaves and the lightning of `oIntro`, then Link walks up out of the dark for 40 ticks with the controls taken away and the level name shows. The outside is four screens (the South and North rooms are 256 x 512 each); the port scrolls them one 224-pixel cell at a time, so its camera differs from the original's following camera by 8 pixels. Its 74 walls were compared one by one with the `oWall` grid (231 boxes, 48 x 64 at x, y + 8), and the path tiles are not solid. The 15 bushes are cut by the sword, arrows, the boomerang and the hookshot (they fly on) and by bombs within 32 pixels, four of them hiding bombs. A bomb within 16 pixels of the castle door's box opens the gate; the opening is 16 pixels wide, so only x = 168 fits and Link slides into it from a few pixels off-centre. Walking into the entrance wall shows the original's message two pixels before Link stops. The Frog of the castle cell talks when Link faces it from its left (the original also allows from below). Each player has a save of their own; a save from before the user menus becomes player 1.- The menus after the title were ported from `oMenu`, `oMenuWin`, `oCredits`, `oInputRemap` and the patch's menu files: Start Game, the Character grid (nine characters, each with its own sprite sheet), the Controls page (eight verbs remapped one at a time; a button taken from another verb swaps; Confirm, Back and Start keep their buttons), the rolling credits (seven pages) and the Challenges hub with its three tabs. Their layouts, texts and tables are in `front.c`, `setup.c`, `controls.c` and `credits.c`, covered by `tests/ui_test.c` and `tests/users_title_test.c`.
+- Challenges: the patch's twelve graded options (Start hearts, Max hearts, Max defense, Darkness, Start slots, Max rupees, Shop prices, Enemies, Curses, No map, No food, Wall Master) with the Hero's Path, Second Quest and Master Quest presets, plus the base game's seven toggles, are stored per player in save v16. All twelve act on a run: Start hearts, Max hearts, Max defense, Max rupees, Shop prices, Enemies, No map and Wall Master as before, and now Start slots (the cap on usable kinds, 5 less the step plus one per bag), Curses (the chest odds, with the original's twelve effects, tasks and announcement), No food (no meals drop or sell) and Darkness. The port had to invent the carriers these need, so they are adaptations: ten usable kinds (boomerang, bow, hookshot, rod, potion, food, antidote, ring, cape, orb), one food slot for all five meal classes with the meal chosen automatically, a bag priced 70 plus 30 for each one bought, a curse that survives a Save Tent, no boss retune mid-fight under Tough, and the claw not counting towards curse tasks. Darkness follows `Lighting_GetRoomStatus` (a natural chance by level, More, All dark, No lights) with one wall light per plain wall, torches that Link lights (they persist per level but are not saved to disk), Link's flickering lamp and an estimated tent light; the outside is lit only by Link under Pitch Black, and All dark and No lights do not apply there. A dark room darkens through a multiply pass on a grid, which cannot brighten above 1; the door fade, the Heat tint, pickup lights and the star light are absent. Host tests cover the values, presets, caps, prices, enemy scale, curse rules, light curve, room rules and the save round trip.
+- The Wall Master of the patch (`wallmaster_*.gml`) is ported as `wallmaster.c` with its sprite, chase speed, idle frames, spawn wait and damage by level, and is on when the Wall Master option is. The hand chases, lunges and hurts Link in Azahar. It attacks only under the original's NovaCanAttack rule: Link idle, swinging, charging, spinning or lifting, never hurt, bounced, shocked, walking, running, pushing, using the boomerang, bow or rod (for the length of their animation) or holding the hookshot out. It freezes during room scrolls. Falling into a hole pauses the port's gameplay during the fall; its stairs are instant level changes, which destroy the hand and respawn it after 200 ticks as the original does; the original descent animation is skipped. `InDoor_Full` (Link standing in a doorway), the powder and the star are not modelled; the cape prevents the hand from attacking, and the order of Link's and the hand's steps within a tick is uncertain by one.
+- The dialogue box (`oDialogueBox`, 200 x 62, three lines, scrolled with A or B) shows the message the original gives when Link has no bombs; its 9-slice margins (6/7/6/7) are the sprite's real ones, and the other windows use 6/6/6/6 (`sMenuWin`) and 3/3/3/3.
+- Audio: the music of each level (the Cave on level 6, the final hallway on level 13), the bosses, the title, the credits theme, the rain, the claw machine and the sound effects are read from the original's audio and played through the DSP. The firmware's DSP is HLE in Azahar, so none of it has been heard.
+- The emulator ignores citro2d colour tints, so the title's multiplied fade and the inactive font use pre-baked sprites rather than a tint. The title's water shaders (heat haze and pixelate) cannot run on a 3DS, so `tools/title_water.py` bakes one static image from them (Distort2 amount 6, speed 0.028, pixelate cell 4), assuming a 1600 x 900 application surface, repeating noise and linear pixelation; it was checked only by eye against `docs/screenshots/title.png`. The rain plays at 0.3: in the original `Intro_ShowLink()` runs before the rain starts, so its 0.7 gain never applies.
+- `python3 -m unittest discover -s tests` runs the unit, game-logic, audio and review tests. Debug builds also read `DOI_FRONT` (1 Select User, 2 name entry, 3 Character, 4 Controls, 5 Challenges, 6 credits, 7 name grid with Down held), `DOI_CREDITS`, `DOI_WALLMASTER=<level>`, `DOI_BEAM`, `DOI_TUNIC` with `DOI_TCHAR`, `DOI_DARK` (0 to 2) and `DOI_MAP`, `DOI_DIALOGUE` (0 slows the intro, 1 and 2 open the no-bombs box) and the capture helpers `DOI_AUTOPLAY`, `DOI_ARCADE`, `DOI_INVENTORY`, `DOI_SHOWCASE`, `DOI_LINKSHEET` and `DOI_SELECT`; they are for development only.
 
-Gameplay presents the complete 256×224 playfield at 4:3 with horizontal pixel aspect correction. **Square pixels** shows it at 8:7. **Integer scaling** rounds its height down to a whole multiple of 224. Where the side borders fit the original 72-pixel Status panels at 2× or more, the panels sit there at a whole-number scale. Elsewhere they open over the playfield at 75% scale and 90% opacity.
+## Gems, pendants and exchanges
 
-The title view is 300×225 on 4:3 screens and widens to the full 400×225 scene at 16:9. Menus keep their 400×300 layout; wider screens extend the landscape at both sides and move the button hints to the corner.
+The nine original gem colors can drop from enemies or be won at the claw machine and are kept separately. Open the inventory and use L or R to see the collection and the eight pendants. At Zora's pond, choose two identified gems with the D-pad and A; B cancels. The original's 45 pair rewards are recorded in `source/gem_rewards.c`, and all eight opal-plus-color combinations can give their respective pendants. The arrow quiver, bomb bag, inventory bag, bow and lamp are also available through their original gem pairs, along with the previously supported equipment and supplies. The arrow capacity is 40, or 80 with the quiver; bomb capacity is 8, or 16 with the bomb bag. The 60-arrow and 10-bomb rewards require the matching upgrade and enough free capacity; otherwise both gems are kept. Some original rewards refer to items still missing from the port: those exchanges are refused without consuming either gem. Exact chest and shop availability and some pendant effects are adaptations, and these additions have not been checked on an emulator or physical console.
 
-The HUD renders after the playfield at its own integer scale, with square pixels and a smaller footprint: 3× on a 1280×960 screen and 4× at 1920×1080. Equipment and counters sit at the playfield's left edge, with hearts at the right. The CRT option affects the world while the HUD and gameplay hints stay crisp.
+The five potion types retain their identities: health, magic, combined, antidote and milk. The four rings convert magic into health, rupees, bombs or arrows; when the bomb or arrow capacity is full, the generated ammunition drops onto the floor. The cape consumes magic and blocks hits while equipped and active. Fire, ice and fairy orbs are kept separately; the legacy untyped claw orb total is preserved separately and cannot be used. The six rods have their own original icons and variants; newly exchanged rods hold 16 charges. In the inventory, X changes the selected potion or rod. Face a rod charger with a rod equipped and hold A to add one charge every 13 ticks, using magic. L/R opens the collection and extra-items pages, where X changes the ring or orb variant and A equips it.
 
-Inventory, map and arcade hints share the HUD scale, footer baseline and right margin. Smaller L/R glyphs stay beside the inventory heading. Item artwork and descriptions retain their larger scale for browsing.
+These systems remain adaptations: rod chargers appear at the two forced original locations and at a deterministic subset of original Kinstone sites; placement and graphics remain approximations. Fire rods newly obtained through chests or shops now use charges; legacy fire rods can still use their former direct-magic behavior. Rod transformation and frozen/stoned enemies are simplified; orbs are lifted and thrown before breaking, and fairy orbs release two collectible fairies. Fire and ice towers use the original 14 animation frames, ice tint, seven patterns, 16-by-48 collision area and ten-frame active period. Their lighting is adapted to the 3DS renderer, and separate floor-level collision is not yet modeled. The cape prevents hits and affects enemy sight, pursuit, attacks and awakening for the types checked against their original scripts; other targeting details may still differ. Different variants of a category share one inventory slot, unlike the original slot grid. Potion variants have a three-per-type limit. Sodas and the treasure bag are still missing, so their gem exchanges leave both gems intact. The new items have not been checked on hardware or an emulator.
 
-The CRT effect is a port of CRT-Lottes. It keeps the full playfield visible and preserves dark detail. Arcade machines use their original effect.
+The wallet challenge limit also applies to arcade winnings, including when a Pikit temporarily holds rupees. Existing saves with a balance above their selected wallet limit can still be loaded; that balance is retained until spent, without adding further rupees while it remains over the limit. No save-format change is required.
 
-</details>
+Save format v16 deliberately rejects earlier saves. Existing files are not deleted; before a new save overwrites an older one, a byte-for-byte `.pre-v16.bak` backup is created unless one already exists. A new adventure is required.
 
-## Credits
+## Village (work in progress)
 
-Justin Bohemier created Dungeons of Infinity. The [PortMaster package](https://github.com/PortsMaster-MV/PortMaster-MV-New/tree/main/ports/zeldadoi) supplies the game files and [GMLoader-next](https://github.com/JohnnyonFlame/gmloader-next) runtime during installation. The installer preserves upstream license files in `zeldadoi-beyond/license/`.
+Level 6 is no longer skipped. Its six central areas and six fixed outer areas select their original numbered room templates, including water rectangles; wall rectangles and house footprints are imported for the central areas. House roofs use one repeated original roof tile. Fifteen house doors lead to the matching original interior templates, with door positions clamped within the screen and return positions reconstructed from the destination after loading a save. The two-screen pub returns through its lower cell. Thirteen families of interior furniture use their reconstructed full original atlas images, variants and template positions. Their collisions remain simplified to 16-pixel cells, and collision-clearing can differ from the drawn furniture. Three connections are approximations that make the fixed level graph traversable; terrain is reduced to 16-pixel cells and may be cleared to keep entrances connected. This is not yet the original village: most village graphics and interior decorations, character activities, shops and most arcade activities have not been ported. The claw machine is playable inside the arcade; four slot machines and three video-poker machines are playable in the pub. Face a cabinet and press A, then B to return to the room. Their locations follow the original templates and the backport patch. Cabinets use the original 24 by 20 collision rectangle. All 31 character placements represented by village NPC objects have sprites and cycle through their original ordinary dialogue lines in template order; conversation indices are not stored in saves and reset at the start of a level; four walking villagers follow their original waypoints at the original speed with fixed pauses; the old lady’s appearance and speech are simplified, and Zelda changes her reply after the first conversation, and the elder gives a wishing stone once with the claimed state retained in saves. The book-to-treasure-key chain is connected; other conditional responses, quests and special interactions remain incomplete, and the complete route has not been checked in an emulator or on hardware. Automated collision checks cover the approach to the fifteen house doors and the fixed quest targets; the title screen has been checked in Azahar. Save format v16 starts a new adventure and does not load earlier saves.
 
-Controller glyphs use Kenney's Input Prompts 1.5A, from `Nintendo Switch 2/Double`, under [CC0](assets/buttons/LICENSE.txt). [The asset manifest](assets/buttons/manifest.json) records source filenames and checksums. The patch copies this artwork without redrawing it.
+## Video poker
 
-The gameplay CRT shader adapts Timothy Lottes' public-domain CRT-Lottes shader from RetroArch. [Shader source and tuning notes](src/shaders/README.md) document the port and its attribution.
+Three pub cabinets now offer Jacks or Better with the original 52-card artwork, hand rankings and 1–5 rupee stakes. Before dealing, use Left/Right to change the bet and A to deal. Select cards with Left/Right, press A to hold them, then X to draw the others. B returns to the pub; an unfinished dealt hand is drawn and settled before leaving. The presentation and controls are adapted to 3DS, and the activity has not been checked on a console or in an emulator.
 
-The release builder uses [bsdiff4](https://pypi.org/project/bsdiff4/) to create the binary patch.
+## Quest inventory (work in progress)
+
+The book, mirror, mushroom, magic powder, medallion and treasure key now have distinct inventory identities and an inventory page. Magic powder uses one usable-item slot. The trade rules operate on the player inventory, reject duplicates and preserve offered items when refused or when the reward cannot fit. The lost book is under the original purple bush in village area 4. Talk to the librarian, the mirror owner, the potion seller, the transformed tree and the king to carry out the trades; select the powder on the quest-items page and press A near the tree. The special key opens the royal treasure-room door. Yes/no offers default to No. Item handoffs, the tree transformation visual and one-step book pickup are simplified, and the full physical route has not been checked on an emulator or device.
+
+Save version 16 stores these quest items, completed trades and the tree transformation. It deliberately refuses older save versions; older files are not deleted.
+
+## Terrain and switches
+
+The room-template export retains water, pits, holes, floor spikes and full-carpet rectangles separately, including obstacle-room templates. Water is walkable; spikes inflict the original 1.5-heart base attack and respect the Protection pendant; holes cause a one-heart fall and return Link to a nearby safe point. Some pots hide a floor switch that reveals a chest when stepped on, and the switch and chest state survive a save. Carpets use the original level tiles; some template-defined monument positions have a simplified solid decoration. Old v2 room-template files remain readable.
+
+The room-template reader now retains all ten original template classes (644 templates); older four- and seven-class files remain readable. In ordinary rooms, unconditional interior walls, rails and fixed blocks from WallsCommon are imported as solid 16-pixel cells; a connectivity check may remove them to preserve a route. Shops, fairy fountains, gem ponds and secret treasure rooms select their corresponding original class-8 model deterministically, checking transformed door-side codes, and use imported water, carpets and one monument where available. Their existing fixed-position interactions and rewards remain in use; these models do not yet reproduce all original object placements, exact door positions or the original special-room probability and reward rules. When no compatible model is available, the existing room layout is retained. Section IDs and wall types are now retained from dungeon templates and transformed with the dungeon; compatible class-7 models are selected using their original built-in section, transformation and door codes. Matching falls back to ordinary rooms when a compatible model is unavailable. The numbered mine areas and fixed boss, save, final hallway, village treasure, Zora and mine wish-room templates are selected where the port has corresponding rooms. Their complete objects and multi-floor rules are not yet implemented; terrain is still reduced to the port’s 16-pixel cells and may be cleared to keep routes open. Existing v1 dungeon files remain readable. Rails currently block projectiles like other walls.
+
+These are adaptations: room selection, terrain probabilities and the 16-pixel approximation of the original 8-pixel shapes are not identical to the original. To avoid trapping the player, the port can remove holes when they disconnect exits. A fall returns Link to his last safe position, without the original animation; water animation and carpets are simplified, and enemy hole interactions remain absent. Enemies marked for water in the original draw animated waterlines when grounded, using the normal, mine or blood palette; sprite widths and offsets are approximate. The floor-switch placement is a deterministic approximation, not the original section puzzle generator. Crystal switches and red/blue blocks are placed in a subset of rooms as a compact adaptation; sword hits and arrows toggle the blocks, and both states are checked for a route through the room. Crystal position, block geometry and their visual animation do not match the original section puzzle generator. Moving-floor rectangles from the original obstacle templates push Link by 0.5 pixel per tick in the transformed direction. Waterfall rectangles from the special templates use the original animated waterfall and foam sprites in separate upper and lower drawing passes, with the original looping sound attenuated by distance. The 16-pixel reconstructed geometry, room selection, shader palettes and transitions are adaptations. Section walls marked for switch blocks now use their original section geometry and color, and a reachable original crystal position; sword hits or arrows toggle them using the saved level-wide state. Their shapes use 16-pixel cells, crystals are chosen deterministically, and a section puzzle is omitted when its crystal cannot be reached safely from each entrance. Original placement probabilities, animation and precise projectile collision differ. The mine’s two original bridge rectangles, horizontal and vertical, are imported with the original atlas art and make holes underneath traversable; the vertical bridge has narrow side rails and the horizontal bridge keeps its lower rail where its full width is visible. Source cells are projected onto the 224-pixel playfield at screen seams, so the cross-screen bridge remains walkable. Bridge geometry is approximated by 16-pixel cells; it is not yet possible to walk on a separate lower floor underneath a bridge, and the horizontal rail is omitted at the seam. Rooms marked with the original door-switch objective now close their switch doors until Link uncovers and steps on a floor switch; they open without using keys and remain open after leaving or saving. The switch uses an accessible original pot position where available, or a central pot as a fallback. Multi-screen rooms keep the switch state at the room origin. Original torch and push-block switch variants, door animations, most monument styles and other set pieces remain missing. The save format for this build does not load older games. These additions have not been tested on an emulator or a physical console.
+
+## Review of the original GML
+
+[docs/REVIEW.md](docs/REVIEW.md) classifies all 588 functions, 322 objects and 33 patch files of the original. It is generated from `tools/review_data.py` and checked by `tests/test_review.py`; `python3 tools/gml_review.py --refresh ../.build/dump` rebuilds the inventory.
+
+It is not a line-by-line comparison of everything: 51 functions were compared in full, 14 in part, and the other 523 were classified by role against what the port contains. The report lists 16 measured deviations (damage, knockback, invincibility length, drops, pickup amounts and more).
+
+The Slarok uses the original energy index 5 for its starting health and weapon damage, including the Tough challenge. The rock speed (2.5) and knockback (1.25 for 12 ticks) were checked against the original projectile Create events. The Rope Step event has no sight-based charge.
+
+## Gaps versus the original
+
+- **Enemies:** Kyameron emitters and moving Kyameron now appear in level 5 and 9 water, and rolling spikes use their source template positions and dimensions in levels 7–9 and 11–12. Kyameron timing, bounce and damage follow the original data; their particle and explosion effects and exact collision masks remain approximate. Rolling spikes bounce at obstacles and deal two hearts; their path conflict checks, per-level limits and single-screen clipping are simplified. Neither addition has been checked on hardware or an emulator. Hover is now present in water on levels 5 and 9, using its original weight, artwork, pause and decelerating charge; spawn geometry and collision mask are approximations. It has not been tested on hardware or an emulator. Pikit, Cannon, Medusa, Beamos and the moving spike block have been added. Pikit hops and extends its tongue: this port steals rupees, bombs or arrows with the original weighted amounts; it restores them when hit or when leaving the room, reserves inventory space while they are held and includes them in saves to avoid loss. Pikit can also temporarily steal an equipped or stored usable item category, with the original 40% selection chance when ammunition or rupees are available. Hit it or leave the room to recover the item; saving retains it. The 3DS inventory groups variants, so a stolen rod, potion, meal, ring or orb temporarily disables its whole category instead of just the original slot. Cannon reacts to Link drawing his sword; Medusa aims red balls and Beamos tracks with its eye and fires a laser. These three are placed independently from normal enemy packs. The spike block moves and bounces in a free area; its original template-defined track is not yet exported. Wall-enemy placement, laser effects and tongue timing are approximations, and these five have not been checked on hardware or an emulator. Previously, 34 types existed. Bubble, Skeleton, Hinox, advanced soldier and mace soldier were added using their original level weights, sprites and combat data. Skeletons dodge and throw bones, Hinox throws timed bombs, and the soldiers carry weapons. Skeleton evasion uses a proximity approximation; Hinox bombs can be lifted and thrown while their fuse continues to burn; their trajectory and explosion effects are approximate, and the soldiers use simplified pursuit, weapon positioning and mace collision. Bubble lighting and water interactions are absent. These five have not been checked in an emulator or on hardware. Previously, 29 types existed: the previous 19 plus Armos (ordinary enemy), Leever, Wizzrobe, Kodongo, Helmasaur, Eyegore, Geldman, Goriya, Zazak and Zirro. Their level pools, artwork, combat attributes and core behaviors are implemented; the new magic, fireballs and falling bombs have their own shield and damage rules. Waking and sinking animation durations are estimated; Geldman uses its walking collision box throughout, and some original variants, effects and recovery details remain approximations. None of these ten has been checked in an emulator or on hardware. The last five use their original enemy data and sprites. Buzz blobs and electrified baris shock Link if he hits them with a sword below level 3. Their dynamic lighting and water effects are absent; the Poe uses a single-screen movement scale even in larger rooms. Animation timing and some movement details are approximated, and these five have not been checked in an emulator or on hardware. Gibdos follow and pause; buzzes, ropas and tektites hop; hardhat beetles chase Link and knock him back when hit with a sword below master level. Enemy animations are estimated; water interactions are absent. The hoarder steers toward Link when close and moves faster after recovering from a hit; the popo alternates rest with pulsed drifting and bounces off walls. Their animation timing is estimated and neither has been checked in an emulator or on hardware. The crab uses its original direction changes, horizontal and vertical speeds, and wall bounce. The simple soldier uses its original movement, sight delay, chase, collision boxes and level-specific strength and colors; its head is rendered separately. Rooms use the original weights and pack points for ported types. Levels 6 and 10 still use a fallback mix because their enemy types are absent; level 12 now includes Ropa and Tektite. The soldier has not been checked in an emulator or on hardware.
+- **Dungeon dressing:** water, holes, spikes, carpets, monuments, cracks, curtains and switches are absent (finding F16). The rat cannot swim because there is no water.
+- **Bosses:** the four fights follow the decompiled scripts, but some numbers are assumptions: the Armos explosion wait, the Lanmola `z` initialisation and dirt timers, the Moldorm body and tail mask, the Aghanim knockback speed and time, the morph-ball length and the lift limited to state 2. The Aghanim intro, the camera shake, item theft and the end cutscene are not ported.
+- **Other assumed numbers:** the spin drift, the zol wake time (16), the template-class pack factor, and the meaning of Link states 20 and 21 (taken as a bounce in progress).
+- **Transitions:** rooms scroll with the original thresholds, speeds and durations, but the closed-door pass-through, the music fade and the handling of the old room's entities during the scroll are not ported.
+- **Save Tents:** the tent exit and the resume position are adaptations. The pause menu does not save; the game saves only at a tent.
+- **Equipment:** ATTACK and DEFENSE follow the original formulas (curses take 3 points off). The tunic exists: a chest and shop find, held back by the original's depth rule, that raises DEFENSE and recolours Link through the `sPalette_*` rows. Sword, shield and glove upgrades are obtainable from chests and shops, using the existing save fields and depth-based attack/defense gates; each sword uses its own original sprite and pixel mask, stronger swords can break pots, and shields appear on Link. The stopwatch has a room-local freeze effect and its original icon; its availability rules and presentation are approximations. The chest probabilities and shop selection remain adaptations, do not reserve uncollected upgrades when applying the depth gate, and adding the new items changes the stock of some previously generated shops; their sold-slot flags and the player's saved equipment stay intact. Shield walking bob and special-action poses are simplified. The sword beam requires the master sword and full hearts; it has not been drawn in an emulator. The claw's coupons, kinstones and wishes are counted and kept; newly won gems retain their colors, and claw orbs are fairy orbs.
+- **Missing systems:** the village and its minigames other than slot machines, the claw and video poker (chess, Zerberk and Pitfall), the dead guys who sell food, and several item classes offered by gem exchanges. The stopwatch can drop from enemies and freezes enemies in the current room; section, star and boss interactions remain incomplete. Villagers are absent outside; only the Frog exists.- **Start-up:** the Settings page holds the port's own volumes and CRT switch. The Controls page remaps eight verbs: Sword, Action, Item, Map, Strafe, Inventory, HUD and the port's own Cycle (ZL and ZR on a New 3DS; an Old 3DS taps the item box on the touch screen). The original's Keyboard verb does not apply to a 3DS. Map is cell-based (24-pixel cells, empty outside and in tents) rather than the original's pixel silhouette, and the origin of Link's map head is assumed. Strafe holds the facing; HUD hides the bottom screen's status (keeping the pick-up message), says how to bring it back and is remembered per player; the pause menu is not gated by it and the inventory is not gated by A held. The characters are Link in a recoloured tunic (levels 0 to 3, baked per character and tunic), not the original's whole palette swap. The credits cross-fade a grey twin of each page at the credits alpha and use the dialogue 9-slice window; the version text is hidden during them.- **Challenges:** see the Status section for what each option does and which carriers are adaptations. No shops turns the shop room into an ordinary room. Tough does not retune a boss in the middle of a fight, and the claw does not count towards curse tasks.- **Outside:** the walls are exact, but the camera is the port's fixed cell (8 pixels off the original's), the camera height of 224 is assumed (the entrance wall sits at camera Y + 212), and the Frog's layer order against Link is a guess. The animation speeds are the original's; the Pitch Black light circle is the port's light curve at Link only. The sword beam is a projectile (class 8, 4.5 pixels a tick, one at a time) whose arming tick and room bounds are measured to about one tick or pixel, and it was never compared with the original at runtime. The water and pixelate shaders cannot run on a 3DS (see the title's baked image); outside the title nothing replaces them.- **Music:** the room-kind overrides of the original (fairy, wish room, gem pond, TMNT room) are not ported; the level songs follow `Music_LevelSongIndex`.
+- **Adaptations:** B goes back in the menus, the bonus picker opens on the current choice, each player remembers their last setup, and the bottom screen shows an A hint.
+- **Arcade:** the slot machine (strip, odds, payouts, bet 1 to 5) and the claw (fee 10, the original prize pool of 95 to 97 prizes) come from `src/gml/arcade/` and are reached from the pause menu or the village cabinets. The claw has no sub-indices and its art is a port adaptation.
+- **Not seen in the emulator:** the Settings page, the dark rooms and torches, the unlit torch, a scroll through a dark room, the gate opening, the effect of the graded options in a real run, the close-up rain, the sword beam, the Frog, the tunic recolours, the Map page, the Controls page with the new verbs, the credits filter and the Wall Master's new gate. In the last session the host's screen was locked and Azahar could not capture, so these checks rest on the host tests and a warning-free build. Start Game, the Character grid, the Challenges hub and tabs, the title with its water, the credits pages, the Wall Master and the first outside were seen in earlier sessions.- **Not seen on screen since the combat work:** the spin and its charge, the Save Tent screens, the room scroll, the coloured rupees and the bosses. Only the host tests and the build cover them.
+- **Not verified on real hardware**, and the audio has not been listened to.

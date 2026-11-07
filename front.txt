@@ -1,0 +1,46 @@
+# alias  sprite[:first-last]   (the frames of a sprite stay together: FS_<alias> + frame)
+nintendo      sTitle_Nintendo
+text          sTitle_Text
+cover         sTitle_TextCover
+text_blk      sTitle_Text           # black silhouettes of text and cover: they darken the multiply fade
+cover_blk     sTitle_TextCover
+sword         sTitle_Sword
+shimmer1      sTitle_SwordShimmer_1
+shimmer2      sTitle_SwordShimmer_2
+shimmer3      sTitle_SwordShimmer_3
+shimmer4      sTitle_SwordShimmer_4
+sparkle       sTitle_Sparkle
+triforce      sTriforceAnimation
+fg_castle     sTitle_Foreground_Castle
+fg_cloud      sTitle_Foreground_Cloud
+fg_mountain   sTitle_Foreground_Mountain
+fg_sky        sTitle_Foreground_Sky
+fg_trees      sTitle_Foreground_Trees
+# the same scenery in grey: oCredits swaps the layer filter for _filter_greyscale, whose intensity follows its alpha.
+# The water layers are not here: export_front.py bakes them with the heathaze and pixelate effect layers as `water` and `water_grey`.
+fg_castle_grey    sTitle_Foreground_Castle
+fg_cloud_grey     sTitle_Foreground_Cloud
+fg_mountain_grey  sTitle_Foreground_Mountain
+fg_sky_grey       sTitle_Foreground_Sky
+fg_trees_grey     sTitle_Foreground_Trees
+menu_bg       sMenuBG
+menu_win      sMenuWin
+menu_win_off  sMenuWin_Innactive
+selector      sMenu_Selector_Active
+selector_off  sMenu_Selector_Innactive
+checkbox      sCheckbox
+checkbox_off  sCheckBox_Innactive
+font          sFont_Menu:0-94
+font_off      sFont_Menu_Innactive:0-94
+hud_font      sHUD_Font:0-94
+dlg_box       sHUD_Window_DialogueBox
+values        sFont_ItemValues
+gear_rupee    sItem_Rupee:0-0
+gear_bag      sItem_Bag:0-0
+gear_heart    sItem_HeartPiece
+gear_shield   sItem_Shield:0-0
+gear_rod      sItem_Rod:0-0
+gear_orb      sItem_Orb:0-0
+gear_potion   sItem_Potion:3-3
+char_sel      sCharacterSelector
+wallmaster    sNovaWallmaster     # the Wall Master challenge's hand: 24 x 23, frame 1 while it lunges
