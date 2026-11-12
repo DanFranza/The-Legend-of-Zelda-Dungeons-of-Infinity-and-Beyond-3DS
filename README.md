@@ -4,9 +4,9 @@ A from-scratch C engine (devkitARM, libctru, citro2d) that reuses the original's
 
 ## Current 3DS build
 
-Use [`doi3ds.3dsx`](doi3ds.3dsx). This build adds the 27 soda flavors, the Arcade vending machine and the original Treasure Bag artwork. It also improves inventory navigation, fixed room contours and open special room selection, and separates enemies, pickups and projectiles by floor.
+Use [`doi3ds.3dsx`](doi3ds.3dsx). This build adds the 27 soda flavors, the Arcade vending machine and the original Treasure Bag artwork. It also improves inventory navigation, fixed room contours and open special room selection, and separates enemies, pickups and projectiles by floor. Multi-height rooms now keep Link, doors, stairs, bridges and room transitions on the correct floor, preventing crossings through a bridge to the lower level and allowing entry to upper doors only from their landing.
 
-In Azahar 2126.2, a scripted run completed level 1 from the castle entrance to level 2 (seed 48, five room transitions and the exit stairs, enemies enabled). Both reported fall cases (levels 2 and 8) were replayed successfully. The title and audio warning were checked on the play build; scripted input and the fall fixtures used a separate diagnostic build. The 47 host tests passed. Sound and physical 3DS hardware were not tested in this pass.
+In Azahar 2126.2, a scripted run completed level 1 from the castle entrance to level 2 (seed 48, five room transitions and the exit stairs, enemies enabled). Both reported fall cases (levels 2 and 8) were replayed successfully. The title and audio warning were checked on the play build; scripted input and the fall fixtures used a separate diagnostic build. The 47 host tests passed, including two-floor bridge, stair and upper-door cases. Sound and physical 3DS hardware were not tested in this pass.
 
 This build uses **save format v25** and requires a new adventure when coming from an older format. Before replacing an older save, the port keeps a `.pre-v25.bak` copy. See [the remaining gaps](#gaps-versus-the-original).
 
