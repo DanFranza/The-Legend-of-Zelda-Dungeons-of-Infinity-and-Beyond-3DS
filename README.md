@@ -2,13 +2,13 @@
 
 A from-scratch C engine (devkitARM, libctru, citro2d) that reuses the original's data and art. It is not a GameMaker runtime.
 
-## Latest local 3DS verification
+## Current 3DS build
 
-The [download on this branch](doi3ds.3dsx) is an earlier build. The locally tested build includes the latest room and progression changes, the source altar and hidden gem rewards, and fixes for two fall regressions: Link no longer returns to a moving floor that pushes him into the same hole, or to a position inside an obstacle. Start opens the player menu during the rolling credits, and the audio warning fits on the lower screen.
+Use [`doi3ds.3dsx`](doi3ds.3dsx). This build includes the latest room and progression changes, the source altar and hidden gem rewards, and fixes for two fall regressions: Link no longer returns to a moving floor that pushes him into the same hole, or to a position inside an obstacle. Start opens the player menu during the rolling credits, and the audio warning fits on the lower screen.
 
 In Azahar 2126.2, a scripted run completed level 1 from the castle entrance to level 2 (seed 48, five room transitions and the exit stairs, enemies enabled). Both reported fall cases (levels 2 and 8) were replayed successfully. The title and audio warning were checked on the play build; scripted input and the fall fixtures used a separate diagnostic build. The 47 host tests passed. Sound and physical 3DS hardware were not tested in this pass.
 
-The locally tested build uses **save format v23** and requires a new adventure when coming from an older format. Before replacing an older save, the port keeps a `.pre-v23.bak` copy. See [the remaining gaps](#gaps-versus-the-original).
+This build uses **save format v23** and requires a new adventure when coming from an older format. Before replacing an older save, the port keeps a `.pre-v23.bak` copy. See [the remaining gaps](#gaps-versus-the-original).
 
 ## Build notes (source checkout)
 
@@ -58,7 +58,7 @@ These systems remain adaptations: rod chargers appear at the two forced original
 
 The wallet challenge limit also applies to arcade winnings, including when a Pikit temporarily holds rupees. Existing saves with a balance above their selected wallet limit can still be loaded; that balance is retained until spent, without adding further rupees while it remains over the limit. No save-format change is required.
 
-See the local verification note above for the latest save format.
+See the current build note above for save compatibility.
 
 ## Village (work in progress)
 
