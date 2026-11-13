@@ -6,6 +6,8 @@ A from-scratch C engine (devkitARM, libctru, citro2d) that reuses the original's
 
 Use [`doi3ds.3dsx`](doi3ds.3dsx). In rooms with two floors, pots, torches, crystal switches, pressure plates and warp pads now respond only on the correct floor. A locked door or closed shutter still blocks Link if he reaches the edge of the screen outside the normal walking transition. The bottom screen shows health, supplies and the mini-map separately, with touch shortcuts for equipment, inventory, map and pause.
 
+Open doorways now assist slightly off-centre approaches earlier, including near wall corners and pits. The repeatable host simulation crossed all 28,804 eligible approaches, covering open doors on levels 1–12.
+
 This build uses **save format 32**. Saves from earlier formats do not load; an older save is backed up with the suffix `.pre-v32.bak` before being replaced. The host suite checks the stair sequence through level 13, including the village at level 6, along with both floors of stacked doors, bridges and the final gate. This revision has not been tested through a full playthrough on physical hardware.
 
 ## Build notes (source checkout)
