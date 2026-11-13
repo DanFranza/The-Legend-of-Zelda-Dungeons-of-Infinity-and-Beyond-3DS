@@ -10,7 +10,9 @@ Open doorways now assist slightly off-centre approaches earlier, including near 
 
 Guards now treat pits as blocked terrain on their own floor. Link can align with a narrow gap between a wall and a railing even when his position is between whole pixels.
 
-This build uses **save format 32**. Saves from earlier formats do not load; an older save is backed up with the suffix `.pre-v32.bak` before being replaced. The host suite checks the stair sequence through level 13, including the village at level 6, along with both floors of stacked doors, bridges and the final gate. This revision has not been tested through a full playthrough on physical hardware.
+This build uses **save format 35**. Saves from earlier formats do not load; an older save is backed up with the suffix `.pre-v35.bak` before being replaced. The host suite checks the stair sequence through level 13, including the village at level 6, along with both floors of stacked doors, bridges and the final gate. This revision has not been tested through a full playthrough on physical hardware.
+
+The current build also includes the swordless route, the 14 level-3 prisoner variants and their dialogues, profile-wide non-repeating fortune readings, Pezo's letter and Justin's 60/75/80-rupee gift, plus the complete Revival Pendant sequence. Before entering the castle, collect the bombs in the bushes, then open Inventory → Quest and choose “leave sword outside”.
 
 ## Build notes (source checkout)
 

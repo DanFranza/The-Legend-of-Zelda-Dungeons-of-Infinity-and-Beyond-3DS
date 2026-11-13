@@ -4,6 +4,11 @@ These versions identify the patch, independently of the original game's version.
 
 ## Unreleased
 
+- 3DS port: add the swordless route and remove sword rewards while it is active.
+- 3DS port: add all prisoner variants and original dialogue, including Pezo, Justin and the fortune teller's profile-persistent reading cycle.
+- 3DS port: reproduce the Revival Pendant sequence with input lock, pendant consumption, healing and invincibility on return.
+- 3DS port: update the playable binary to save format 35; previous game saves are intentionally rejected.
+
 ## [2.0.0](https://github.com/saschb2b/The-Legend-of-Zelda-Dungeons-of-Infinity-and-Beyond/releases/tag/v2.0.0) - 2026-09-23
 
 The 4:3 edition becomes **Dungeons of Infinity and Beyond** and adapts to the screen it runs on.
