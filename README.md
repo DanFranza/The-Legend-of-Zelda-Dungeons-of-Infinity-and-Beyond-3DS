@@ -4,11 +4,9 @@ A from-scratch C engine (devkitARM, libctru, citro2d) that reuses the original's
 
 ## Current 3DS build
 
-Use [`doi3ds.3dsx`](doi3ds.3dsx). This build adds the 27 soda flavors, the Arcade vending machine and the original Treasure Bag artwork. It also improves inventory navigation, fixed room contours and open special room selection, and separates enemies, pickups and projectiles by floor. Multi-height rooms now keep Link, doors, stairs, bridges and room transitions on the correct floor, preventing crossings through a bridge to the lower level and allowing entry to upper doors only from their landing.
+Use [`doi3ds.3dsx`](doi3ds.3dsx). In rooms with two floors, pots, torches, crystal switches, pressure plates and warp pads now respond only on the correct floor. A locked door or closed shutter still blocks Link if he reaches the edge of the screen outside the normal walking transition. The bottom screen shows health, supplies and the mini-map separately, with touch shortcuts for equipment, inventory, map and pause.
 
-In Azahar 2126.2, a scripted run completed level 1 from the castle entrance to level 2 (seed 48, five room transitions and the exit stairs, enemies enabled). Both reported fall cases (levels 2 and 8) were replayed successfully. The title and audio warning were checked on the play build; scripted input and the fall fixtures used a separate diagnostic build. The 47 host tests passed, including two-floor bridge, stair and upper-door cases. Sound and physical 3DS hardware were not tested in this pass.
-
-This build uses **save format v25** and requires a new adventure when coming from an older format. Before replacing an older save, the port keeps a `.pre-v25.bak` copy. See [the remaining gaps](#gaps-versus-the-original).
+This build uses **save format 32**. Saves from earlier formats do not load; an older save is backed up with the suffix `.pre-v32.bak` before being replaced. The host suite checks the stair sequence through level 13, including the village at level 6, along with both floors of stacked doors, bridges and the final gate. This revision has not been tested through a full playthrough on physical hardware.
 
 ## Build notes (source checkout)
 
