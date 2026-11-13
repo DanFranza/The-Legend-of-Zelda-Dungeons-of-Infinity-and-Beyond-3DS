@@ -4,6 +4,8 @@ A from-scratch C engine (devkitARM, libctru, citro2d) that reuses the original's
 
 ## Current 3DS build
 
+v44 keeps pots out of doorway arrivals on the matching floor. Face Zora's pond and press Interact to trade; Zora shows the prize and keeps your gems untouched if it won't fit. Link can lift and throw placed bombs, bombs made by the Bomb Rod, and red bombs from Hinox and Agahnim. Zirro's bombs remain projectiles that explode on impact. The 47 automated tests passed.
+
 Use [`doi3ds.3dsx`](doi3ds.3dsx). In rooms with two floors, pots, torches, crystal switches, pressure plates and warp pads now respond only on the correct floor. A locked door or closed shutter still blocks Link if he reaches the edge of the screen outside the normal walking transition. The bottom screen shows health, supplies and the mini-map separately, with touch shortcuts for equipment, inventory, map and pause.
 
 Open doorways now assist slightly off-centre approaches earlier, including near wall corners and pits. The repeatable host simulation crossed all 28,804 eligible approaches, covering open doors on levels 1–12.
