@@ -8,6 +8,8 @@ Use [`doi3ds.3dsx`](doi3ds.3dsx). In rooms with two floors, pots, torches, cryst
 
 Open doorways now assist slightly off-centre approaches earlier, including near wall corners and pits. The repeatable host simulation crossed all 28,804 eligible approaches, covering open doors on levels 1–12.
 
+Guards now treat pits as blocked terrain on their own floor. Link can align with a narrow gap between a wall and a railing even when his position is between whole pixels.
+
 This build uses **save format 32**. Saves from earlier formats do not load; an older save is backed up with the suffix `.pre-v32.bak` before being replaced. The host suite checks the stair sequence through level 13, including the village at level 6, along with both floors of stacked doors, bridges and the final gate. This revision has not been tested through a full playthrough on physical hardware.
 
 ## Build notes (source checkout)
